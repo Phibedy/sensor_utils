@@ -37,10 +37,10 @@ private:
     float m_stepLength, m_sensivity;
     float m_minY, m_maxY;
 public:
+    LinedDepthEnvironment();
+    void set(float stepLength, float sensivity,float yMin, float yMax);
 
-    LinedDepthEnvironment(float stepLength, float sensivity);
-
-    bool add(float deltaX,float distance);
+    bool add(float deltaX,float y);
     /**
      * @brief draw
      * @param distanceInPixel how many meters one pixel is

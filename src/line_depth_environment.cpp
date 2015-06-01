@@ -1,13 +1,18 @@
 #include <sensor_utils/line_depth_environment.h>
 #include <cmath>
 #include <iostream>
-LinedDepthEnvironment::LinedDepthEnvironment(float stepLength, float sensivity):
-    xBuffer(0),m_stepLength(stepLength),m_sensivity(sensivity),m_minY(-INFINITY), m_maxY(INFINITY){
-    unsigned int k = 0;
-    std::cout << "##############" << (0 +1< k -1) << "###########" <<std::endl;
+LinedDepthEnvironment::LinedDepthEnvironment():xBuffer(0),m_stepLength(0),m_sensivity(0),m_minY(-INFINITY), m_maxY(INFINITY){
+}
+
+void LinedDepthEnvironment::set(float stepLength, float sensivity,float yMin, float yMax){
+    m_stepLength = stepLength;
+    m_sensivity = sensivity;
+    m_minY = yMin;
+    m_maxY = yMax;
 }
 
 bool LinedDepthEnvironment::add(float deltaX,float y){
+    //std::cout <<"ANFANG" <<xBuffer << " "<< m_stepLength <<std::endl;
     xBuffer += deltaX;
     if(xBuffer < m_stepLength)
         return false;
@@ -17,10 +22,13 @@ bool LinedDepthEnvironment::add(float deltaX,float y){
     if(y > m_maxY)
         y = m_maxY;
     //add values to the discrete vector
+    //std::cout <<"Davor" <<xBuffer << " "<< m_stepLength <<std::endl;
     while(xBuffer > m_stepLength){
         m_distances.push_back(y);
         xBuffer -= m_stepLength;
+        //std::cout <<"DRIN" <<xBuffer << " "<< m_stepLength <<std::endl;
     }
+    //std::cout <<"DANACH" <<std::endl;
     //now the xBuffer should be negative as we substracted the stepLength one time to often -> add it again
     xBuffer += m_stepLength;
     return true;
@@ -44,7 +52,7 @@ void LinedDepthEnvironment::draw(lms::imaging::Graphics *graphics,float distance
     //draw found parts
     //might be disturbing that the x-axis of the part is the y-axis of the image :)
     graphics->setColor(lms::imaging::blue);
-    for(int i = 0; i < parts.size(); i++){
+    for(uint i = 0; i < parts.size(); i++){
         LineDepthSegment &p = parts[i];
         graphics->drawLine(xPadding+p.y*mul,p.startIndex*mul,xPadding + p.y*mul,p.endIndex*mul);
     }
@@ -61,7 +69,7 @@ void LinedDepthEnvironment::validate(){
     }
     float startY = m_distances[startSearch];
 
-    for(int i = startSearch+1; i < m_distances.size(); i++){
+    for(uint i = startSearch+1; i < m_distances.size(); i++){
         if(abs(m_distances[i]-startY) > m_sensivity){
             //found new part
             parts.push_back(LineDepthSegment(startSearch,i,startSearch*m_stepLength, i*m_stepLength,startY));
