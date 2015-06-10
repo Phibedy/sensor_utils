@@ -1,5 +1,5 @@
-#ifndef SENSOR_ENVIRONMENT_H
-#define SENSOR_ENVIRONMENT_H
+#ifndef LINE_DEPTH_ENVIRONMENT_H
+#define LINE_DEPTH_ENVIRONMENT_H
 #include <vector>
 #include <lms/imaging/graphics.h>
 
