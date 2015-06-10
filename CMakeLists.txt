@@ -6,8 +6,10 @@ set ( SOURCES
 set (HEADERS 
 	"include/sensor_utils/line_depth_environment.h"
     "include/sensor_utils/dynamic_entity.h"
+    "include/sensor_utils/car.h"
 )
 
 include_directories("include")
 add_library (sensor_utils SHARED ${SOURCES} ${HEADERS})
-#target_link_libraries (imaging PRIVATE lms)
+target_link_libraries (sensor_utils PRIVATE lms)
+target_link_libraries (sensor_utils PUBLIC imaging)

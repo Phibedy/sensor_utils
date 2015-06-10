@@ -3,6 +3,7 @@
 
 #include "lms/math/vertex.h"
 
+namespace sensor_utils {
 /**
  * @brief A dynamic entity can be the vehicle itself but also every other
  * moving obstacle.
@@ -72,5 +73,6 @@ struct DynamicEntity {
      */
     float deltaVelocity() const;
 };
+}//sensor_utils
 
 #endif /* DYNAMIC_ENTITY_H */
