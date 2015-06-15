@@ -22,6 +22,11 @@ float DynamicEntity::movedDistance() const {
     return this->position.distance(this->lastPositon);
 }
 
+
+lms::math::vertex2f DynamicEntity::deltaPosition() const{
+    return this->position-lastPositon;
+}
+
 float DynamicEntity::deltaVelocity() const {
     return this->velocity - this->lastVelocity;
 }

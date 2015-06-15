@@ -67,6 +67,8 @@ struct DynamicEntity {
      */
     float movedDistance() const;
 
+    lms::math::vertex2f deltaPosition() const;
+
     /**
      * @brief Difference in velocity to the last cycle.
      * @return delta velocity in m/s
