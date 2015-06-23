@@ -6,7 +6,6 @@ set ( SOURCES
 set (HEADERS 
 	"include/sensor_utils/line_depth_environment.h"
     "include/sensor_utils/dynamic_entity.h"
-    "include/sensor_utils/distance_sensor.h"
     "include/sensor_utils/car.h"
 )
 
