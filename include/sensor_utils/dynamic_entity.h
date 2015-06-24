@@ -13,33 +13,30 @@ struct DynamicEntity {
      * @brief Global position of the entity. x and y are given in meters.
      */
     lms::math::vertex2f position;
+    lms::math::vertex2f lastPositon;
 
     /**
      * @brief Direction vector that points to the direction the entity is
      * looking at.
      */
     lms::math::vertex2f viewDirection;
+    lms::math::vertex2f lastViewDirection;
 
     /**
      * @brief Velocity in m/s of the entity.
      */
     float velocity;
+    /**
+     * @brief Velocity of the entity in the last cycle.
+     */
+    float lastVelocity;
 
     /**
      * @brief Direction vector that points to the direction the entity is
      * driving to.
      */
     lms::math::vertex2f moveDirection;
-
-    /**
-     * @brief Global position of the entity in the last cycle.
-     */
-    lms::math::vertex2f lastPositon;
-
-    /**
-     * @brief Velocity of the entity in the last cycle.
-     */
-    float lastVelocity;
+    lms::math::vertex2f lastMoveDirection;
 
     DynamicEntity();
 
@@ -52,6 +49,8 @@ struct DynamicEntity {
     void updatePosition(const lms::math::vertex2f &position,
                         const lms::math::vertex2f &viewDirection);
 
+    //void updatePosition(float dx, float dy, float dphi);
+
     /**
      * @brief Set the velocity for the current cycle. Should be called only
      * once per cycle.
@@ -61,19 +60,19 @@ struct DynamicEntity {
     void updateVelocity(float velocity,
                         const lms::math::vertex2f &moveDirection);
 
-    /**
-     * @brief Distance travelled compared to the last cycle.
-     * @return distance in m
-     */
-    float movedDistance() const;
+
+    //####Delta-Values
 
     lms::math::vertex2f deltaPosition() const;
-
     /**
      * @brief Difference in velocity to the last cycle.
      * @return delta velocity in m/s
      */
     float deltaVelocity() const;
+    float deltaX() const;
+    float deltaY() const;
+    float deltaPhi() const;
+    float movedDistance() const;
 };
 }//sensor_utils
 
