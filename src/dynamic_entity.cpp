@@ -8,6 +8,7 @@ void DynamicEntity::updatePosition(const lms::math::vertex2f &position,
                                    const lms::math::vertex2f &viewDirection) {
     this->lastPositon = this->position;
     this->position = position;
+    this->lastViewDirection = this->viewDirection;
     this->viewDirection = viewDirection;
 }
 
@@ -31,4 +32,17 @@ lms::math::vertex2f DynamicEntity::deltaPosition() const{
 float DynamicEntity::deltaVelocity() const {
     return this->velocity - this->lastVelocity;
 }
+
+
+float DynamicEntity::deltaX() const{
+    return position.x -lastPositon.x;
+}
+float DynamicEntity::deltaY() const{
+    return position.y -lastPositon.y;
+}
+float DynamicEntity::deltaPhi() const{
+    return viewDirection.angle()-lastViewDirection.angle();
+
+}
+
 }//sensor_utils
