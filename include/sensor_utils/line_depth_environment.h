@@ -47,9 +47,12 @@ public:
      */
     void draw(lms::imaging::Graphics *graphics,float distanceInPixel=1);
 
+
     void validate();
 
-    const std::vector<LineDepthSegment>& getParts();
+    void validate() const;
+
+    const std::vector<LineDepthSegment>& getParts() const;
 };
 
 

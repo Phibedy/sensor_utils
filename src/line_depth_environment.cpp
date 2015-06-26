@@ -58,6 +58,11 @@ void LinedDepthEnvironment::draw(lms::imaging::Graphics *graphics,float distance
     }
 }
 
+
+void LinedDepthEnvironment::validate() const{
+    const_cast<LinedDepthEnvironment*>(this)->validate();
+}
+
 void LinedDepthEnvironment::validate(){
     if(m_sensivity == 0 || m_distances.size() == 0){
         //TODO not sure what should happen :'(
@@ -80,7 +85,7 @@ void LinedDepthEnvironment::validate(){
 }
 
 
-const std::vector<LinedDepthEnvironment::LineDepthSegment>& LinedDepthEnvironment::getParts(){
+const std::vector<LinedDepthEnvironment::LineDepthSegment>& LinedDepthEnvironment::getParts() const{
     validate();
     return parts;
 }
