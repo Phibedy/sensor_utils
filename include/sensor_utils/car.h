@@ -4,13 +4,25 @@
 #include "senseboard2015.h"
 
 namespace sensor_utils {
-struct Car:public DynamicEntity{
-        Car():steering_front(0),steering_rear(0),targetSpeed(0){
-        }
+class Car:public DynamicEntity{
+public:
+    Car():steering_front(0),steering_rear(0),targetSpeed(0){
+    }
 
-        float steering_front, steering_rear;
-        float targetSpeed;
-    };
+    float steering_front, steering_rear;
+    float targetSpeed;
+
+    // cereal implementation
+#ifdef USE_CEREAL
+    //get default interface for datamanager
+    CEREAL_SERIALIZATION()
+
+    template <class Archive>
+    void serialize( Archive & archive) {
+        archive(steering_front,steering_rear,targetSpeed);
+    }
+#endif
+};
 }//sensor_utils
 
 #endif //SENSOR_UTILS_CAR_H
