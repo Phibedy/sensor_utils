@@ -2,6 +2,7 @@
 #define SENSOR_UTILS_CAR_H
 #include "sensor_utils/dynamic_entity.h"
 #include "senseboard2015.h"
+#include "cereal/types/base_class.hpp"
 
 namespace sensor_utils {
 class Car:public DynamicEntity{
@@ -20,6 +21,7 @@ public:
     template <class Archive>
     void serialize( Archive & archive) {
         archive(steering_front,steering_rear,targetSpeed);
+        archive(cereal::base_class<DynamicEntity>(this));
     }
 #endif
 };
