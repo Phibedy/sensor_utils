@@ -8,6 +8,7 @@ set (HEADERS
     "include/sensor_utils/dynamic_entity.h"
     "include/sensor_utils/distance_sensor.h"
     "include/sensor_utils/car.h"
+    "include/sensor_utils/pid_controller.h"
 )
 
 include_directories("include")
