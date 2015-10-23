@@ -1,7 +1,7 @@
 #ifndef LINE_DEPTH_ENVIRONMENT_H
 #define LINE_DEPTH_ENVIRONMENT_H
 #include <vector>
-#include <lms/imaging/graphics.h>
+//#include <lms/imaging/graphics.h>
 
 /**
  * @brief The LinedDepthEnvironment class used to track depths (y-values) on one axis.
@@ -45,7 +45,9 @@ public:
      * @brief draw
      * @param distanceInPixel how many meters one pixel is
      */
+    /* TODO
     void draw(lms::imaging::Graphics *graphics,float distanceInPixel=1);
+    */
 
 
     void validate();

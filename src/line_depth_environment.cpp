@@ -38,6 +38,7 @@ bool LinedDepthEnvironment::add(float deltaX,float y){
  * @brief draw
  * @param distanceInPixel how many meters one pixel is
  */
+/* TODO
 void LinedDepthEnvironment::draw(lms::imaging::Graphics *graphics,float distanceInPixel){
     std::cout << "draw START" << std::endl;
     float mul = distanceInPixel*m_stepLength;
@@ -57,7 +58,7 @@ void LinedDepthEnvironment::draw(lms::imaging::Graphics *graphics,float distance
         graphics->drawLine(xPadding+p.y*mul,p.startIndex*mul,xPadding + p.y*mul,p.endIndex*mul);
     }
 }
-
+*/
 
 void LinedDepthEnvironment::validate() const{
     const_cast<LinedDepthEnvironment*>(this)->validate();

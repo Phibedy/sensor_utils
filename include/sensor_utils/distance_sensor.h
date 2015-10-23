@@ -1,7 +1,7 @@
 #ifndef DISTANCE_SENSOR_H
 #define DISTANCE_SENSOR_H
 #include "lms/math/vertex.h"
-#include <lms/imaging/graphics.h>
+//#include <lms/imaging/graphics.h>
 
 
 namespace sensor_utils{

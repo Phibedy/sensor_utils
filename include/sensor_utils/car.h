@@ -1,8 +1,6 @@
 #ifndef SENSOR_UTILS_CAR_H
 #define SENSOR_UTILS_CAR_H
 #include "sensor_utils/dynamic_entity.h"
-#include "senseboard2015.h"
-#include "cereal/types/base_class.hpp"
 
 namespace sensor_utils {
 class Car:public DynamicEntity{
@@ -15,6 +13,7 @@ public:
 
     // cereal implementation
 #ifdef USE_CEREAL
+#include "cereal/types/base_class.hpp"
     //get default interface for datamanager
     CEREAL_SERIALIZATION()
 
