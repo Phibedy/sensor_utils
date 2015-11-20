@@ -38,14 +38,16 @@ public:
         float targetSpeed;
 
         bool intime(const lms::extra::PrecisionTime &currentTime) const{
+            if(endState == lms::extra::PrecisionTime::ZERO){
+                return true;
+            }
             return startState < currentTime && currentTime < endState;
         }
     };
-
-private:
-
-    std::vector<State> states;
 public:
+
+    std::vector<State> states; //TODO not sure if it should be public
+
     State getPrioState() const{
         if(states.size() == 0){
             //TODO throw error
@@ -111,11 +113,14 @@ public:
      */
     void validateStates(const lms::extra::PrecisionTime &currentTime){
         for(uint i = 0; i < states.size();){
+            //TODO
+            /*
             if(!states[i].intime(currentTime)){
                 states.erase(states.begin()+i);
             }else{
                 i++;
             }
+            */
         }
     }
 
