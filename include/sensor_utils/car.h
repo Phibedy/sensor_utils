@@ -4,6 +4,10 @@
 #include "lms/extra/time.h"
 
 namespace sensor_utils {
+/**
+  *TODO Add hasState()
+ * @brief The Car class
+ */
 class Car:public DynamicEntity{
 public:
     Car(){
@@ -45,6 +49,7 @@ public:
     State getPrioState() const{
         if(states.size() == 0){
             //TODO throw error
+            return State();
         }
         State prio = states[0];
         for(uint i = 1; i < states.size();i++){
