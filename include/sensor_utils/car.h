@@ -3,6 +3,12 @@
 #include "sensor_utils/dynamic_entity.h"
 #include "lms/extra/time.h"
 
+#ifdef USE_CEREAL
+#include "cereal/types/vector.hpp"
+#include "cereal/types/string.hpp"
+#include "cereal/types/base_class.hpp"
+#endif
+
 namespace sensor_utils {
 /**
   *TODO Add hasState()
@@ -42,6 +48,12 @@ public:
                 return true;
             }
             return startState < currentTime && currentTime < endState;
+        }
+
+        template <class Archive>
+        void serialize( Archive & archive) {
+            archive(priority, name, state, startState, endState, steering_front,
+                    steering_rear, targetSpeed);
         }
     };
 public:
@@ -126,14 +138,13 @@ public:
 
     // cereal implementation
 #ifdef USE_CEREAL
-#include "cereal/types/base_class.hpp"
     //get default interface for datamanager
     CEREAL_SERIALIZATION()
 
     template <class Archive>
     void serialize( Archive & archive) {
         //TODO
-        //archive(states);
+        archive(states);
         archive(cereal::base_class<DynamicEntity>(this));
     }
 #endif
