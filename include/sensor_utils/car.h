@@ -42,9 +42,13 @@ public:
         lms::extra::PrecisionTime endState;
         float steering_front, steering_rear;
         float targetSpeed;
-
+        /**
+         * @brief intime
+         * @param currentTime
+         * @return
+         */
         bool intime(const lms::extra::PrecisionTime &currentTime) const{
-            if(endState == lms::extra::PrecisionTime::ZERO){
+            if(endState == lms::extra::PrecisionTime::ZERO && startState == lms::extra::PrecisionTime::ZERO){
                 return true;
             }
             return startState < currentTime && currentTime < endState;
@@ -125,14 +129,11 @@ public:
      */
     void validateStates(const lms::extra::PrecisionTime &currentTime){
         for(uint i = 0; i < states.size();){
-            //TODO
-            /*
             if(!states[i].intime(currentTime)){
                 states.erase(states.begin()+i);
             }else{
                 i++;
             }
-            */
         }
     }
 
