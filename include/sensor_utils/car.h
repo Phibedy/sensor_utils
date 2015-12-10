@@ -22,7 +22,7 @@ public:
         NOT_DEFINED,IDLE,DRIVING,PARKING,RACE
     };
     struct State{
-        State():priority(0),state(StateType::NOT_DEFINED),startState(lms::extra::PrecisionTime::ZERO),
+        State():priority(0),state(StateType::NOT_DEFINED),startState(lms::extra::PrecisionTime::ZERO),indicatorLeft(false),indicatorRight(false),
             endState(lms::extra::PrecisionTime::ZERO),steering_front(0),steering_rear(0),targetSpeed(0){}
 
         /**
@@ -31,6 +31,8 @@ public:
         int priority;
         std::string name;
         StateType state;
+        bool indicatorLeft;
+        bool indicatorRight;
 
         /**
          * @brief startState
