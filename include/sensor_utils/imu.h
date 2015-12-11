@@ -1,6 +1,7 @@
 #ifndef SENSOR_UTILS_IMU_H
 #define SENSOR_UTILS_IMU_H
 
+#include "sensor.h"
 namespace sensor_utils{
 struct Vector{
     float x;
@@ -8,7 +9,7 @@ struct Vector{
     float z;
 };
 
-struct IMU{
+struct IMU: public Sensor{
     Vector acc;
     Vector gyro;
     Vector magnetometer;

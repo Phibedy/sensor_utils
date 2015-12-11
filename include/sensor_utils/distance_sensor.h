@@ -1,11 +1,11 @@
 #ifndef DISTANCE_SENSOR_H
 #define DISTANCE_SENSOR_H
 #include "lms/math/vertex.h"
-//#include <lms/imaging/graphics.h>
+#include "sensor.h"
 
 
 namespace sensor_utils{
-class DistanceSensor{
+class DistanceSensor:public Sensor{
 public:
 
     DistanceSensor():localPosition(lms::math::vertex2f(0,0)),direction(0),distance(0){
@@ -27,6 +27,8 @@ public:
         return localPosition.y + sin(direction)*distance;
     }
 };
+
+typedef std::vector<DistanceSensor> DistanceSensors;
 } //namespace sensor_utils
 
 #endif /* SENSOR_ENVIRONMENT_H */
