@@ -45,15 +45,14 @@ public:
         }
         return false;
     }
-    void put(Sensor& toAdd){
+    void put(SensorPtr toAdd){
         for(SensorPtr s:m_sensors){
-            if(s->name() == toAdd.name()){
-                *s = toAdd; //set the data
+            if(s->name() == toAdd->name()){
+                *s = *toAdd; //set the data
                 return;
             }
         }
-        std::shared_ptr<Sensor> s(&toAdd);//TODO not sure if this works
-        m_sensors.push_back(s);
+        m_sensors.push_back(toAdd);
     }
 };
 }
