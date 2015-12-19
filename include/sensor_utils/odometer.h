@@ -1,18 +1,30 @@
 #ifndef SENSOR_UTILS_ODOMETER_H
 #define SENSOR_UTILS_ODOMETER_H
-#include "sensor.h"
-namespace sensor_utils{
-class Odometer:public Sensor{
-public:
-    float xdist; /*< Distance travelled along x-axis [m]*/
-    float ydist; /*< Distance travelled along y-axis [m]*/
-    float zdist; /*< Distance travelled along z-axis [m]*/
-    float xvelocity; /*< Velocity along x-axis [m/s]*/
-    float yvelocity; /*< Velocity along y-axis [m/s]*/
-    float zvelocity; /*< Velocity along z-axis [m/s]*/
 
+#include "sensor.h"
+#include "types.h"
+
+namespace sensor_utils
+{
+struct Odometer : public Sensor
+{
+    typedef Vector3 Measurement;
+    typedef Matrix3 Covariance;
+
+    //! Distance travelled within last time-step along x,y,z-axis [m]
+    Measurement distance;
+    //! Current velocity along x,y,z-axis [m/s]
+    Measurement velocity;
+
+    //! Covariance of distance measurements
+    Covariance distanceCovariance;
+    //! Covariance of velocity measurements
+    Covariance velocityCovariance;
+
+    //! Quality indication number in [0,1] (higher is better)
+    float quality;
 };
-}//sensor_utils
+} //sensor_utils
 
 
 #endif //SENSOR_UTILS_ODOMETER_H
