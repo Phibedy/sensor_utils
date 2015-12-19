@@ -4,21 +4,21 @@
 #include <vector>
 #include <memory>
 namespace sensor_utils{
-class Sensor{
+class Sensor {
     std::string m_name;
-    int m_sensorId;
+    size_t m_sensorId;
 public:
     std::string name() const{
         return m_name;
     }
-    void name(std::string name){
+    void name(const std::string& name){
         m_name = name;
     }
     int sensorId() const{
         return m_sensorId;
     }
 
-    void sensorId(int sensorId){
+    void sensorId(size_t sensorId){
         m_sensorId = sensorId;
     }
 };
