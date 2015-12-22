@@ -17,7 +17,7 @@ public:
     void name(const std::string& name){
         m_name = name;
     }
-    int sensorId() const{
+    size_t sensorId() const{
         return m_sensorId;
     }
 
