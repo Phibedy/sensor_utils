@@ -2,6 +2,7 @@
 #define SENSOR_UTILS_SENSOR_H
 #include <string>
 #include <vector>
+#include <unordered_map>
 #include <memory>
 namespace sensor_utils{
 class Sensor {
@@ -28,32 +29,37 @@ typedef  std::shared_ptr<Sensor> SensorPtr;
  * @brief The SensorContainer class
  */
 class SensorContainer{
-    std::vector<std::shared_ptr<Sensor>> m_sensors;
+protected:
+    typedef std::unordered_map<std::string, SensorPtr> container;
+public:
+    typedef container::iterator iterator;
+    typedef container::const_iterator const_iterator;
 public:
     template<typename T>
-    std::shared_ptr<T> sensor(std::string name){
-        for(SensorPtr s: m_sensors){
-            if(s->name() == name)
-                return std::static_pointer_cast<T>(s);
+    std::shared_ptr<T> sensor(const std::string& name){
+        const auto it = m_sensors.find(name);
+        if(it != m_sensors.end())
+        {
+            // Found sensor
+            return std::static_pointer_cast<T>( *it );
         }
         return std::make_shared<T>(nullptr);
     }
-    bool hasSensor(std::string name){
-        for(SensorPtr s: m_sensors){
-            if(s->name() == name)
-                return true;
-        }
-        return false;
+    bool hasSensor(const std::string& name){
+        return ( m_sensors.find(name) != m_sensors.end() );
     }
     void put(SensorPtr toAdd){
-        for(SensorPtr s:m_sensors){
-            if(s->name() == toAdd->name()){
-                *s = *toAdd; //set the data
-                return;
-            }
-        }
-        m_sensors.push_back(toAdd);
+        m_sensors[toAdd->name()] = toAdd;
     }
+
+    iterator begin() { return m_sensors.begin(); }
+    iterator end() { return m_sensors.end(); }
+
+    const_iterator begin() const { return m_sensors.begin(); }
+    const_iterator end() const { return m_sensors.end(); }
+protected:
+    //! Sensor data storage
+    container m_sensors;
 };
 }
 
