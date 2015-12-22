@@ -23,6 +23,14 @@ struct Odometer : public Sensor
 
     //! Quality indication number in [0,1] (higher is better)
     float quality;
+
+    void print(std::ostream& out) const
+    {
+        out << "Odometer [ "
+        << "distance: " << distance << " | "
+        << "velocity: " << velocity
+        << " ]";
+    }
 };
 } //sensor_utils
 

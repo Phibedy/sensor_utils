@@ -26,6 +26,13 @@ public:
     float totalY() const{
         return localPosition.y + sin(direction)*distance;
     }
+
+    void print(std::ostream& out) const
+    {
+        out << "Distance [ "
+        << "distance: " << distance
+        << " ]";
+    }
 };
 
 typedef std::vector<DistanceSensor> DistanceSensors;

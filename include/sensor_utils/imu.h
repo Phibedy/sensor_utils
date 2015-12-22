@@ -24,6 +24,15 @@ struct IMU : public Sensor{
     Covariance gyroscopeCovariance;
     //! Covariance of magnetic field measurements
     Covariance magnetometerCovariance;
+
+    void print(std::ostream& out) const
+    {
+        out << "IMU [ "
+            << "acc: " << accelerometer << " | "
+            << "gyro: " << gyroscope << " | "
+            << "mag: " << magnetometer
+            << " ]";
+    }
 };
 }
 

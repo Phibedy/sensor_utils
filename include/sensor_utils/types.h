@@ -38,6 +38,12 @@ class Vector3
             return *this;
         }
 
+        friend std::ostream& operator<<(std::ostream& out, const Vector3& vec)
+        {
+            out << "Vector[ x: " << vec.x() <<  " y: " << vec.y() << " z: " << vec.z() << " ]";
+            return out;
+        }
+
     protected:
         float data[3];
 };

@@ -4,6 +4,8 @@
 #include <vector>
 #include <unordered_map>
 #include <memory>
+#include <iostream>
+
 namespace sensor_utils{
 class Sensor {
     std::string m_name;
@@ -22,6 +24,13 @@ public:
     void sensorId(size_t sensorId){
         m_sensorId = sensorId;
     }
+
+    friend std::ostream& operator<<(std::ostream& out, const Sensor& sensor)
+    {
+        sensor.print(out);
+        return out;
+    }
+    virtual void print(std::ostream& out) const = 0;
 };
 typedef  std::shared_ptr<Sensor> SensorPtr;
 /**
