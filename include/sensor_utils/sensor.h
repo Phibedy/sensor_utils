@@ -56,16 +56,16 @@ public:
     typedef container::const_iterator const_iterator;
 public:
     template<typename T>
-    std::shared_ptr<T> sensor(const std::string& name){
+    std::shared_ptr<T> sensor(const std::string& name) const {
         const auto it = m_sensors.find(name);
         if(it != m_sensors.end())
         {
             // Found sensor
-            return std::static_pointer_cast<T>( *it );
+            return std::static_pointer_cast<T>( it->second );
         }
-        return std::make_shared<T>(nullptr);
+        return std::make_shared<T>();
     }
-    bool hasSensor(const std::string& name){
+    bool hasSensor(const std::string& name) const {
         return ( m_sensors.find(name) != m_sensors.end() );
     }
     void put(SensorPtr toAdd){
