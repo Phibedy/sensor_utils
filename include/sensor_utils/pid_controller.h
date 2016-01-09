@@ -5,9 +5,9 @@ namespace sensor_utils{
 class PID{
     //params
     double m_Vbias;
-    double m_Kc;
-    double m_Ti;
-    double m_Td;
+    double m_Kp;
+    double m_Ki;
+    double m_Kd;
     double m_dt;
 
     //used to calculate PID
@@ -20,17 +20,15 @@ public:
     }
 
     /**
-     * @param Vbias is an optional, user set bias for the controller output
-     * @param Kc is a proportional tuning constant
-     * @param Ti is an integral tuning constant
-     * @param Td is a derivative tuning constant
+     * @param Kp is a proportional tuning constant
+     * @param Ki is an integral tuning constant
+     * @param Kd is a derivative tuning constant
      * @param dt is the rate the loop runs at, by default 1
      */
-    void set(double Vbias, double Kc,double Ti,double Td,double dt = 1){
-        m_Vbias = Vbias;
-        m_Kc  = Kc;
-        m_Ti = Ti;
-        m_Td = Td;
+    void set(double Kp,double Ki,double Kd,double dt = 1){
+        m_Kp  = Kp;
+        m_Ki = Ki;
+        m_Kd = Kd;
         m_dt = dt;
     }
 
@@ -47,7 +45,7 @@ public:
     double pid(double e, double dt) {
         double v;
         eSum = eSum + e;
-        v = m_Kc*(e + 1.0/m_Ti * eSum + m_Td * (e - eOld)/dt);
+        v = m_Kp*e + m_Ki * eSum + m_Kd * (e - eOld)/dt;
         eOld = e;
         return v;
     }
