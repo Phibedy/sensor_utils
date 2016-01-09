@@ -6,10 +6,13 @@
 #include <memory>
 #include <iostream>
 
+#include <lms/extra/time.h>
+
 namespace sensor_utils{
 class Sensor {
     std::string m_name;
     size_t m_sensorId;
+    lms::Time m_timestamp; //!< Timestamp of measurement in SENSOR timebase
 public:
     std::string name() const{
         return m_name;
@@ -23,6 +26,14 @@ public:
 
     void sensorId(size_t sensorId){
         m_sensorId = sensorId;
+    }
+
+    lms::Time timestamp() const {
+        return m_timestamp;
+    }
+
+    void timestamp(lms::Time timestamp) {
+        m_timestamp = timestamp;
     }
 
     friend std::ostream& operator<<(std::ostream& out, const Sensor& sensor)
