@@ -37,6 +37,15 @@ protected:
     float lastVelocity;
 
     /**
+     * @brief Turn rate (rad/s) of the entity
+     */
+    float m_turnRate;
+    /**
+     * @brief Turn rate of the entity in the last cycle.
+     */
+    float lastTurnRate;
+
+    /**
      * @brief Direction vector that points to the direction the entity is
      * driving to.
      */
@@ -57,6 +66,10 @@ public:
 
     float velocity()const{
         return m_velocity;
+    }
+
+    float turnRate()const{
+        return m_turnRate;
     }
 
     /**
@@ -80,6 +93,13 @@ public:
                         const lms::math::vertex2f &moveDirection);
 
 
+    /**
+    * @brief Set the turn rate for the current cycle. Should be called only
+    * once per cycle.
+    * @param turnRate The turn rate of the entity
+    */
+    void updateTurnRate(float turnRate);
+
     //####Delta-Values
 
     lms::math::vertex2f deltaPosition() const;
@@ -91,6 +111,7 @@ public:
     float deltaX() const;
     float deltaY() const;
     float deltaPhi() const;
+    float deltaTurnRate() const;
     float movedDistance() const;
 
     // cereal implementation

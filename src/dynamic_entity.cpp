@@ -45,4 +45,14 @@ float DynamicEntity::deltaPhi() const{
 
 }
 
+    void DynamicEntity::updateTurnRate(float turnRate)
+    {
+        this->lastTurnRate = this->m_turnRate;
+        this->m_turnRate = turnRate;
+    }
+
+    float DynamicEntity::deltaTurnRate() const
+    {
+        return (this->m_turnRate - this->lastTurnRate);
+    }
 }//sensor_utils
