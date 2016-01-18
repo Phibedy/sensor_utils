@@ -114,6 +114,7 @@ public:
     float deltaTurnRate() const;
     float movedDistance() const;
 
+
     // cereal implementation
     #ifdef USE_CEREAL
         //get default interface for datamanager

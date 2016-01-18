@@ -1,7 +1,7 @@
 #ifndef SENSOR_UTILS_CAR_H
 #define SENSOR_UTILS_CAR_H
 #include "sensor_utils/dynamic_entity.h"
-#include "lms/extra/time.h"
+#include "lms/time.h"
 
 #ifdef USE_CEREAL
 #include "cereal/types/vector.hpp"
@@ -22,8 +22,8 @@ public:
         NOT_DEFINED,IDLE,DRIVING,PARKING,RACE
     };
     struct State{
-        State():priority(0),state(StateType::NOT_DEFINED),indicatorLeft(false),indicatorRight(false),startState(lms::extra::PrecisionTime::ZERO),
-            endState(lms::extra::PrecisionTime::ZERO),steering_front(0),steering_rear(0),targetSpeed(0){}
+        State():priority(0),state(StateType::NOT_DEFINED),indicatorLeft(false),indicatorRight(false),startState(lms::Time::ZERO),
+            endState(lms::Time::ZERO),steering_front(0),steering_rear(0),targetSpeed(0){}
 
         /**
          * @brief priority of the state, for example StateType::DRIVING could have priority 1, PARKING could have 2 -> the car would par
@@ -37,11 +37,11 @@ public:
         /**
          * @brief startState
          */
-        lms::extra::PrecisionTime startState;
+        lms::Time startState;
         /**
          * @brief endState time till the car should do something (for example idle)
          */
-        lms::extra::PrecisionTime endState;
+        lms::Time endState;
         float steering_front, steering_rear;
         float targetSpeed;
         /**
@@ -49,8 +49,8 @@ public:
          * @param currentTime
          * @return
          */
-        bool intime(const lms::extra::PrecisionTime &currentTime) const{
-            if(endState == lms::extra::PrecisionTime::ZERO && startState == lms::extra::PrecisionTime::ZERO){
+        bool intime(const lms::Time &currentTime) const{
+            if(endState == lms::Time::ZERO && startState == lms::Time::ZERO){
                 return true;
             }
             return startState < currentTime && currentTime < endState;
@@ -62,9 +62,11 @@ public:
                     steering_rear, targetSpeed);
         }
     };
-public:
-
+private:
     std::vector<State> states; //TODO not sure if it should be public
+    float m_localDx;
+    float m_localDy;
+public:
 
     State getPrioState() const{
         if(states.size() == 0){
@@ -129,7 +131,7 @@ public:
      * @brief validateStates removed invalid/outdated states
      * @param currentTime
      */
-    void validateStates(const lms::extra::PrecisionTime &currentTime){
+    void validateStates(const lms::Time &currentTime){
         for(uint i = 0; i < states.size();){
             if(!states[i].intime(currentTime)){
                 states.erase(states.begin()+i);
@@ -137,6 +139,19 @@ public:
                 i++;
             }
         }
+    }
+
+    void localDx(float dx){
+        m_localDx = dx;
+    }
+    void localDy(float dy){
+        m_localDy = dy;
+    }
+    float localDx() const{
+        return m_localDx;
+    }
+    float localDy() const{
+        return m_localDy;
     }
 
     // cereal implementation
@@ -147,7 +162,7 @@ public:
     template <class Archive>
     void serialize( Archive & archive) {
         //TODO
-        archive(states);
+        archive(states,m_localDx,m_localDy);
         archive(cereal::base_class<DynamicEntity>(this));
     }
 #endif

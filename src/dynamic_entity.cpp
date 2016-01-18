@@ -24,7 +24,6 @@ float DynamicEntity::movedDistance() const {
     return this->m_position.distance(this->lastPositon);
 }
 
-
 lms::math::vertex2f DynamicEntity::deltaPosition() const{
     return this->m_position-lastPositon;
 }
@@ -33,26 +32,25 @@ float DynamicEntity::deltaVelocity() const {
     return this->m_velocity - this->lastVelocity;
 }
 
-
 float DynamicEntity::deltaX() const{
     return m_position.x -lastPositon.x;
 }
+
 float DynamicEntity::deltaY() const{
     return m_position.y -lastPositon.y;
 }
+
 float DynamicEntity::deltaPhi() const{
     return m_viewDirection.angle()-lastViewDirection.angle();
 
 }
 
-    void DynamicEntity::updateTurnRate(float turnRate)
-    {
-        this->lastTurnRate = this->m_turnRate;
-        this->m_turnRate = turnRate;
-    }
+void DynamicEntity::updateTurnRate(float turnRate){
+    this->lastTurnRate = this->m_turnRate;
+    this->m_turnRate = turnRate;
+}
 
-    float DynamicEntity::deltaTurnRate() const
-    {
-        return (this->m_turnRate - this->lastTurnRate);
-    }
+float DynamicEntity::deltaTurnRate() const{
+    return (this->m_turnRate - this->lastTurnRate);
+}
 }//sensor_utils
