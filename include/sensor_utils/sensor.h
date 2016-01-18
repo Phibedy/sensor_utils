@@ -14,6 +14,8 @@ class Sensor {
     size_t m_sensorId;
     lms::Time m_timestamp; //!< Timestamp of measurement in SENSOR timebase
 public:
+    Sensor():m_sensorId(0), m_timestamp(lms::Time::ZERO){}
+    Sensor(std::string name):m_name(name),m_sensorId(0), m_timestamp(lms::Time::ZERO){}
     std::string name() const{
         return m_name;
     }
@@ -36,12 +38,14 @@ public:
         m_timestamp = timestamp;
     }
 
+    virtual void print(std::ostream& out) const{
+        (void)out;
+    }
     friend std::ostream& operator<<(std::ostream& out, const Sensor& sensor)
     {
         sensor.print(out);
         return out;
     }
-    virtual void print(std::ostream& out) const = 0;
 };
 typedef  std::shared_ptr<Sensor> SensorPtr;
 /**
@@ -81,6 +85,42 @@ protected:
     //! Sensor data storage
     container m_sensors;
 };
+
+struct SensorHasUpdate{
+    //We could use Sensor
+private:
+    std::vector<Sensor> sensors;
+public:
+    bool hasSensor(const Sensor &sensor){
+        for(const Sensor &s:sensors){
+            if(s.name() == sensor.name()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool hasUpdate(const Sensor &sensor) const{
+        for(const Sensor &s:sensors){
+            if(s.name() == sensor.name()){
+                return s.timestamp() < sensor.timestamp();
+            }
+        }
+        //TODO error handling
+        return false;
+    }
+    void updateSensor(const Sensor &sensor){
+        for(Sensor &s:sensors){
+            if(s.name() == sensor.name()){
+                s.timestamp(sensor.timestamp());
+            }
+        }
+    }
+    void addSensor(const Sensor &s){
+        sensors.push_back(s);
+    }
+};
+
 }
 
 #endif //SENSOR_UTILS_SENSOR_H
