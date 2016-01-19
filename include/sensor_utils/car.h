@@ -141,19 +141,6 @@ public:
         }
     }
 
-    void localDx(float dx){
-        m_localDx = dx;
-    }
-    void localDy(float dy){
-        m_localDy = dy;
-    }
-    float localDx() const{
-        return m_localDx;
-    }
-    float localDy() const{
-        return m_localDy;
-    }
-
     // cereal implementation
 #ifdef USE_CEREAL
     //get default interface for datamanager
