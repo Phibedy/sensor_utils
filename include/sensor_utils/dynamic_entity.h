@@ -103,6 +103,8 @@ public:
     //####Delta-Values
 
     lms::math::vertex2f deltaPosition() const;
+    lms::math::vertex2f localDeltaPosition() const;
+
     /**
      * @brief Difference in velocity to the last cycle.
      * @return delta velocity in m/s

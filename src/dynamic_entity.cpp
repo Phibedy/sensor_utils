@@ -28,6 +28,10 @@ lms::math::vertex2f DynamicEntity::deltaPosition() const{
     return this->m_position-lastPositon;
 }
 
+lms::math::vertex2f DynamicEntity::localDeltaPosition() const  {
+    return (this->m_position-lastPositon).rotate(-lastPositon.angle());
+}
+
 float DynamicEntity::deltaVelocity() const {
     return this->m_velocity - this->lastVelocity;
 }
