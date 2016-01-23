@@ -93,11 +93,11 @@ public:
         return getPrioState().targetSpeed;
     }
 
-    void addState(State &s){
+    void addState(const State &s){
         states.push_back(s);
     }
 
-    void putState(State &s){
+    void putState(const State &s){
         for(uint i = 0; i < states.size(); i++){
             if(states[i].name == s.name){
                 states[i] = s;
