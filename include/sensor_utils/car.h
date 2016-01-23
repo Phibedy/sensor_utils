@@ -7,6 +7,7 @@
 #include "cereal/types/vector.hpp"
 #include "cereal/types/string.hpp"
 #include "cereal/types/base_class.hpp"
+#include "cereal/cerealizable.h"
 #endif
 
 namespace sensor_utils {
@@ -21,7 +22,7 @@ public:
     enum class StateType{
         NOT_DEFINED,IDLE,DRIVING,PARKING,RACE
     };
-    struct State{
+    struct State:public lms::Serializable{
         State():priority(0),state(StateType::NOT_DEFINED),indicatorLeft(false),indicatorRight(false),startState(lms::Time::ZERO),
             endState(lms::Time::ZERO),steering_front(0),steering_rear(0),targetSpeed(0){}
 
@@ -55,6 +56,10 @@ public:
             }
             return startState < currentTime && currentTime < endState;
         }
+
+#ifdef USE_CEREAL
+    CEREAL_SERIALIZATION()
+#endif
 
         template <class Archive>
         void serialize( Archive & archive) {
