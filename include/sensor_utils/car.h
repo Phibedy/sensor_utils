@@ -22,7 +22,11 @@ public:
     enum class StateType{
         NOT_DEFINED,IDLE,DRIVING,PARKING,RACE
     };
-    struct State:public lms::Serializable{
+    struct State
+#ifdef USE_CEREAL
+        : public lms::Serializable
+#endif
+    {
         State():priority(0),state(StateType::NOT_DEFINED),indicatorLeft(false),indicatorRight(false),startState(lms::Time::ZERO),
             endState(lms::Time::ZERO),steering_front(0),steering_rear(0),targetSpeed(0){}
 
@@ -59,13 +63,13 @@ public:
 
 #ifdef USE_CEREAL
     CEREAL_SERIALIZATION()
-#endif
 
         template <class Archive>
         void serialize( Archive & archive) {
             archive(priority, name, state, startState, endState, steering_front,
                     steering_rear, targetSpeed);
         }
+#endif
     };
 private:
     std::vector<State> states; //TODO not sure if it should be public
