@@ -1,13 +1,10 @@
 set ( SOURCES
     "src/line_depth_environment.cpp"
-    "src/dynamic_entity.cpp"
 )
 
 set (HEADERS
     "include/sensor_utils/line_depth_environment.h"
-    "include/sensor_utils/dynamic_entity.h"
     "include/sensor_utils/distance_sensor.h"
-    "include/sensor_utils/car.h"
     "include/sensor_utils/pid_controller.h"
     "include/sensor_utils/imu.h"
     "include/sensor_utils/plane.h"

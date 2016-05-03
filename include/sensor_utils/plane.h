@@ -1,6 +1,5 @@
 #ifndef SENSOR_UTILS_PLANE_H
 #define SENSOR_UTILS_PLANE_H
-#include "sensor_utils/dynamic_entity.h"
 #include <cmath>
 
 namespace sensor_utils {
