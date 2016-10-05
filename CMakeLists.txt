@@ -24,5 +24,5 @@ if((${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang") OR (${CMAKE_CXX_COMPILER_ID} STRE
 endif()
 
 
-add_library (sensor_utils SHARED ${SOURCES} ${HEADERS})
-target_link_libraries (sensor_utils PRIVATE ${CONAN_LIBS})
+add_library (lms_sensor_utils SHARED ${SOURCES} ${HEADERS})
+target_link_libraries (lms_sensor_utils PRIVATE ${CONAN_LIBS})

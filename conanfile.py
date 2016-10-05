@@ -18,4 +18,4 @@ class SensorUtilsConan(ConanFile):
         self.copy("*.so", dst="lib")
 
     def package_info(self):
-        self.cpp_info.libs = ["lms_math"]
+        self.cpp_info.libs = ["lms_sensor_utils"]
