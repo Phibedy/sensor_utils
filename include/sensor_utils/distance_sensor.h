@@ -36,6 +36,10 @@ public:
         return v;
     }
 
+    int indexFromAngle() const{
+        return 0; //TODO
+    }
+
 };
 
 class DistanceSensor:public Sensor{
