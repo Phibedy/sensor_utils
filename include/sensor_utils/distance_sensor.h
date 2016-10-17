@@ -5,6 +5,43 @@
 
 
 namespace sensor_utils{
+
+class DistanceSensorRadial:public Sensor{
+public:
+    DistanceSensorRadial():localPosition(0,0),minDistance(0),maxDistance(0),direction(0),startAngle(0),anglePerIndex(0){}
+
+    lms::math::vertex2f localPosition;
+    float minDistance;
+    float maxDistance;
+    /**
+     * @brief direction angle in radians
+     */
+    float direction;
+    /**
+     * @brief startAngle first angle of the measurement in radians
+     */
+    float startAngle;
+    /**
+     * @brief anglePerIndex in radians
+     */
+    float anglePerIndex;
+    std::vector<float> distances;
+
+    std::vector<lms::math::vertex2f> getXY(){
+        std::vector<lms::math::vertex2f> v;
+        for(int i = 0; i < (int)distances.size(); i++){
+            float angle = startAngle + i*anglePerIndex -direction;
+            v.push_back(lms::math::vertex2f(distances[i]*cos(angle),distances[i]*sin(angle)));
+        }
+        return v;
+    }
+
+    int indexFromAngle() const{
+        return 0; //TODO
+    }
+
+};
+
 class DistanceSensor:public Sensor{
 public:
 
