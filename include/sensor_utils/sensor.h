@@ -6,7 +6,7 @@
 #include <memory>
 #include <iostream>
 
-#include <lms/extra/time.h>
+#include <lms/time.h>
 
 namespace sensor_utils{
 class Sensor {
