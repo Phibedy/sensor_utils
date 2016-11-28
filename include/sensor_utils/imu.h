@@ -34,6 +34,7 @@ struct IMU : public Sensor{
             << " ]";
     }
 };
+typedef  std::shared_ptr<IMU> IMUPtr;
 }
 
 #endif //SENSOR_UTILS_IMU_H

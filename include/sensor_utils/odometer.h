@@ -36,6 +36,8 @@ struct Odometer : public Sensor
         << " ]";
     }
 };
+
+typedef  std::shared_ptr<Odometer> OdometerPtr;
 } //sensor_utils
 
 
