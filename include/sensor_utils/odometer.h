@@ -16,7 +16,8 @@ struct Odometer : public Sensor
     /**
      * @brief absDistance Distance travelled (doesn't have to be the sum of all distances)
      */
-    //Measurement absDistance;
+    Measurement absDistance;
+
     //! Current velocity along x,y,z-axis [m/s]
     Measurement velocity;
 

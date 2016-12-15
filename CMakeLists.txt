@@ -17,6 +17,7 @@ set (HEADERS
     "include/sensor_utils/plane.h"
     "include/sensor_utils/sensor.h"
     "include/sensor_utils/odometer.h"
+    "include/sensor_utils/parking_sensor.h"
 )
 
 include_directories("include")
