@@ -25,7 +25,14 @@ public:
      * @brief anglePerIndex in radians
      */
     float anglePerIndex;
+    /**
+     * @brief distances in m
+     */
     std::vector<float> distances;
+    /**
+     * @brief intensities value between 0 and 1
+     */
+    std::vector<float> intensities;
 
     std::vector<lms::math::vertex2f> getXY(){
         std::vector<lms::math::vertex2f> v;
