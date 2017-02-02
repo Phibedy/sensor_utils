@@ -75,6 +75,9 @@ public:
     void put(SensorPtr toAdd){
         m_sensors[toAdd->name()] = toAdd;
     }
+    std::size_t size() const{
+        return m_sensors.size();
+    }
 
     iterator begin() { return m_sensors.begin(); }
     iterator end() { return m_sensors.end(); }
